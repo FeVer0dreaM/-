@@ -1,3 +1,16 @@
+1 顺序表基本操作
+本题要求实现顺序表元素的增、删、查找以及顺序表输出共4个基本操作函数。L是一个顺序表，函数Status ListInsert_Sq(SqList &L, int pos, ElemType e)是在顺序表的pos位置插入一个元素e（pos应该从1开始），函数Status ListDelete_Sq(SqList &L, int pos, ElemType &e)是删除顺序表的pos位置的元素并用引用型参数e带回（pos应该从1开始），函数int ListLocate_Sq(SqList L, ElemType e)是查询元素e在顺序表的位次并返回（如有多个取第一个位置，返回的是位次，从1开始，不存在则返回0），函数void ListPrint_Sq(SqList L)是输出顺序表元素。实现时需考虑表满扩容的问题。
+
+函数接口定义：
+Status ListInsert_Sq(SqList &L, int pos, ElemType e);
+Status ListDelete_Sq(SqList &L, int pos, ElemType &e);
+int ListLocate_Sq(SqList L, ElemType e);
+void ListPrint_Sq(SqList L);
+其中 L 是顺序表。 pos 是位置； e 代表元素。当插入与删除操作中的pos参数非法时，函数返回ERROR，否则返回OK。
+
+裁判测试程序样例：
+
+//库函数头文件包含
 #include<stdio.h>
 #include<malloc.h>
 #include<stdlib.h>
@@ -80,61 +93,20 @@ int main() {
     }
     return 0;
 }
-Status ListInsert_Sq(SqList &L, int pos, ElemType e) {
-    //检查插入位置是否越界
-    if (pos < 1 || pos > L.length + 1) return ERROR;
-    //检查表在插入数据后是否需要扩容
-    if (L.length >= L.listsize) {
-        ElemType *newbase = (ElemType *) realloc(L.elem, (L.listsize + LISTINCREMENT) * sizeof(ElemType));
-        if (!newbase) exit(OVERFLOW);
-        L.elem = newbase;
-        L.listsize += LISTINCREMENT;
-    }
-    //插入内容并将插入的元素后面的值依次后移
-    ElemType *q = &(L.elem[pos - 1]);
-    for (ElemType *p = &(L.elem[L.length - 1]); p >= q; --p)
-        *(p + 1) = *p;
-    *q = e;
-    ++L.length;
-    return OK;
-}
 
-Status ListDelete_Sq(SqList &L, int pos, ElemType &e) {
-    //检查删除元素位置合法性
-    if ((pos < 1) || (pos > L.length)) return ERROR;
-    //将插入的元素位置转换为数组中实际索引位置
-    ElemType* p = &(L.elem[pos - 1]);
-    //将删除的元素保存在指针p，留作备份
-    e = *p;
-    //将删除的元素后面的值依次前移
-    ElemType* q = L.elem + L.length - 1;
-    for (++p; p <= q; ++p)
-        *(p - 1) = *p;
-    --L.length;
-    return OK;
-}
+/* 请在这里填写答案 */
+输入格式：
+第一行输入一个整数operationNumber，表示操作数，接下来operationNumber行，每行表示一个操作信息（含“操作种类编号 操作内容”）。 编号为1表示插入操作，后面两个参数表示插入的位置和插入的元素值 编号为2表示删除操作，后面一个参数表示删除的位置 编号为3表示查找操作，后面一个参数表示查找的值 编号为4表示顺序表输出操作
+输出格式：
+对于操作2,输出删除的元素的值 对于操作3,输出该元素的位置，如果不存在该元素，输出“NOT FOUND”； 对于操作4,顺序输出整个顺序表的元素，两个元素之间用空格隔开，最后一个元素后面没有空格。
 
-int ListLocate_Sq(SqList L, ElemType e) {
-    //定义一个计数器
-    int i = 1;
-    //定义一个指向第一个元素的指针
-    ElemType *p = L.elem;
-    //每次比较指针指向的值是否为查找值，指针移动，计数器增加
-    while (i <= L.length && *p++ != e) ++i;
-    //若计数器在表范围内则输出
-    if (i <= L.length)
-        return i;
-    else
-        return 0;
-}
-
-void ListPrint_Sq(SqList L) {
-    for (int i = 0; i < L.length; i++) {
-        //依次输出表内元素
-        printf("%d", L.elem[i]);
-        //若不为最后一位，输出元素后输出空格
-        if (i != L.length - 1)
-            printf(" ");
-    }
-}
-
+输入样例：
+4
+1 1 11
+2 2
+3 3
+4
+输出样例：
+1
+3
+11 2 3 4 5 6 7 8 9 10
