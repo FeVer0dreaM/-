@@ -1,6 +1,10 @@
 数据结构-顺序表系列操作
 1 顺序表基本操作
-本题要求实现顺序表元素的增、删、查找以及顺序表输出共4个基本操作函数。L是一个顺序表，函数Status ListInsert_Sq(SqList &L, int pos, ElemType e)是在顺序表的pos位置插入一个元素e（pos应该从1开始），函数Status ListDelete_Sq(SqList &L, int pos, ElemType &e)是删除顺序表的pos位置的元素并用引用型参数e带回（pos应该从1开始），函数int ListLocate_Sq(SqList L, ElemType e)是查询元素e在顺序表的位次并返回（如有多个取第一个位置，返回的是位次，从1开始，不存在则返回0），函数void ListPrint_Sq(SqList L)是输出顺序表元素。实现时需考虑表满扩容的问题。
+本题要求实现顺序表元素的增、删、查找以及顺序表输出共4个基本操作函数。
+L是一个顺序表，函数Status ListInsert_Sq(SqList &L, int pos, ElemType e)是在顺序表的pos位置插入一个元素e（pos应该从1开始），
+函数Status ListDelete_Sq(SqList &L, int pos, ElemType &e)是删除顺序表的pos位置的元素并用引用型参数e带回（pos应该从1开始），
+函数int ListLocate_Sq(SqList L, ElemType e)是查询元素e在顺序表的位次并返回（如有多个取第一个位置，返回的是位次，从1开始，不存在则返回0），
+函数void ListPrint_Sq(SqList L)是输出顺序表元素。实现时需考虑表满扩容的问题。
 
 函数接口定义：
 Status ListInsert_Sq(SqList &L, int pos, ElemType e);
@@ -97,7 +101,8 @@ int main() {
 
 /* 请在这里填写答案 */
 输入格式：
-第一行输入一个整数operationNumber，表示操作数，接下来operationNumber行，每行表示一个操作信息（含“操作种类编号 操作内容”）。 编号为1表示插入操作，后面两个参数表示插入的位置和插入的元素值 编号为2表示删除操作，后面一个参数表示删除的位置 编号为3表示查找操作，后面一个参数表示查找的值 编号为4表示顺序表输出操作
+第一行输入一个整数operationNumber，表示操作数，接下来operationNumber行，每行表示一个操作信息（含“操作种类编号 操作内容”）。 
+编号为1表示插入操作，后面两个参数表示插入的位置和插入的元素值 编号为2表示删除操作，后面一个参数表示删除的位置 编号为3表示查找操作，后面一个参数表示查找的值 编号为4表示顺序表输出操作
 输出格式：
 对于操作2,输出删除的元素的值 对于操作3,输出该元素的位置，如果不存在该元素，输出“NOT FOUND”； 对于操作4,顺序输出整个顺序表的元素，两个元素之间用空格隔开，最后一个元素后面没有空格。
 
@@ -113,7 +118,8 @@ int main() {
 11 2 3 4 5 6 7 8 9 10
 
 2 顺序表创建和就地逆置
-本题要求实现顺序表的创建和就地逆置操作函数。L是一个顺序表，函数ListCreate_Sq(SqList &L)用于创建一个顺序表，函数ListReverse_Sq(SqList &L)是在不引入辅助数组的前提下将顺序表中的元素进行逆置，如原顺序表元素依次为1,2,3,4，则逆置后为4,3,2,1。
+本题要求实现顺序表的创建和就地逆置操作函数。
+L是一个顺序表，函数ListCreate_Sq(SqList &L)用于创建一个顺序表，函数ListReverse_Sq(SqList &L)是在不引入辅助数组的前提下将顺序表中的元素进行逆置，如原顺序表元素依次为1,2,3,4，则逆置后为4,3,2,1。
 
 函数接口定义：
 Status ListCreate_Sq(SqList &L);
@@ -297,7 +303,8 @@ struct LNode {
     ElementType Data[MAXSIZE];
     Position Last; /* 保存线性表中最后一个元素在数组中的位置 */
 };
-L是用户传入的一个线性表，其中ElementType元素可以通过>、==、<进行比较；minD和maxD分别为待删除元素的值域的下、上界。函数Delete应将Data[]中所有值大于minD而且小于maxD的元素删除，同时保证表中剩余元素保持顺序存储，并且相对位置不变，最后返回删除后的表。
+L是用户传入的一个线性表，其中ElementType元素可以通过>、==、<进行比较；minD和maxD分别为待删除元素的值域的下、上界。
+函数Delete应将Data[]中所有值大于minD而且小于maxD的元素删除，同时保证表中剩余元素保持顺序存储，并且相对位置不变，最后返回删除后的表。
 
 裁判测试程序样例：
 #include <stdio.h>
